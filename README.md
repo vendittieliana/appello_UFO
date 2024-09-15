@@ -18,4 +18,11 @@ Arco: tra 2 sighting che sono avvenuti nello stesso STATO
 
 Peso: differenza delle due longitudini
 
-LAB) 
+LAB) Grafo SEMPLICE, PESATO, NON ORIENTATO
++stampa del peso dei vicini (getPesiArchiAdiacenti)
+
+Nodi: tutti gli stati nella tabella state
+
+Archi: tra due stati confinanti
+
+Peso: numero di avvistamenti con stessa forma
