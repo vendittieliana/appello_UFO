@@ -92,3 +92,9 @@ class Model:
 
     def _calcola_cammino_ricorsivo(self, parziale: list[Sighting], successivi: list[Sighting]):
         pass
+
+
+
+#################################################
+#################################################
+Roger Giuli, 2+2 fa 6 :-P
