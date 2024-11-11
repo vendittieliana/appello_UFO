@@ -149,3 +149,29 @@ WHERE YEAR(datetime) = @selected_year
 
 ####################################
 getAllEdges e buildGraph mi sembrano fatti bene, quindi l'output torna?
+
+
+#####################################
+# fammi sapere se può andar bene
+ def analizza_grafo(self):
+        # Conta il numero di nodi per ciascuna durata
+        durata_counts = {}
+        for node in self._grafo.nodes(data=True):
+            duration = node[1]['duration']
+            if duration not in durata_counts:
+                durata_counts[duration] = 0
+            durata_counts[duration] += 1
+
+        # Stampa il numero di nodi per ciascuna durata
+        print("Conteggio dei nodi per ciascuna durata:")
+        for duration, count in sorted(durata_counts.items()):
+            print(f"Durata: {duration} minuti - Nodi: {count}")
+
+        # Calcola la durata media degli avvistamenti nel grafo
+        if len(self._grafo.nodes) > 0:
+            durata_media = sum(node[1]['duration'] for node in self._grafo.nodes(data=True)) / len(self._grafo.nodes)
+            print(f"Durata media degli avvistamenti nel grafo: {durata_media:.2f} minuti")
+        else:
+            print("Non ci sono avvistamenti nel grafo.")
+
+
