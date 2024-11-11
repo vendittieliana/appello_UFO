@@ -98,3 +98,50 @@ class Model:
 #################################################
 #################################################
 sono all'opera
+
+# ottenere i valori minimi e massimi delle durate
+SELECT MIN(duration) AS min_duration, MAX(duration) AS max_duration
+FROM sighting;
+
+# ottenere tutti gli anni presenti nella colonna datetime
+SELECT DISTINCT YEAR(datetime) AS year
+FROM sighting
+ORDER BY year DESC;
+
+# trovare i nodi (Avvistamenti validi)
+SELECT *
+FROM sighting
+WHERE YEAR(datetime) = @selected_year
+  AND duration > @min_duration
+  AND duration < @max_duration;
+
+# trovare gli archi (Relazioni fra avvistamenti con la stessa forma)
+SELECT s1.id AS source_id, s2.id AS target_id
+FROM sighting s1
+JOIN sighting s2 ON s1.shape = s2.shape
+WHERE YEAR(s1.datetime) = @selected_year
+  AND YEAR(s2.datetime) = @selected_year
+  AND s1.duration > @min_duration
+  AND s1.duration < @max_duration
+  AND s2.duration > @min_duration
+  AND s2.duration < @max_duration
+  AND s1.id <> s2.id -- Evita la stessa riga
+  AND (
+    (s1.duration < s2.duration) OR
+    (s1.duration = s2.duration AND s1.id < s2.id)
+  );
+
+# analisi delle durate nel grafo. Questa query conta il numero di nodi per ciascuna durata nel grafo e calcola la durata media.
+SELECT duration, COUNT(*) AS node_count
+FROM sighting
+WHERE YEAR(datetime) = @selected_year
+  AND duration > @min_duration
+  AND duration < @max_duration
+GROUP BY duration
+ORDER BY duration;
+
+SELECT AVG(duration) AS avg_duration
+FROM sighting
+WHERE YEAR(datetime) = @selected_year
+  AND duration > @min_duration
+  AND duration < @max_duration;
