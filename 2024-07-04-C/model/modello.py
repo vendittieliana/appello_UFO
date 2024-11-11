@@ -145,3 +145,7 @@ FROM sighting
 WHERE YEAR(datetime) = @selected_year
   AND duration > @min_duration
   AND duration < @max_duration;
+
+
+####################################
+getAllEdges e buildGraph mi sembrano fatti bene, quindi l'output torna?
