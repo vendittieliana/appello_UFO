@@ -199,3 +199,8 @@ def analizza_grafo(self):
         risultati_analisi = self._model.analizza_grafo()
         durata_counts = risultati_analisi["durata_counts"]
         durata_media = risultati_analisi["durata_media"]
+
+
+##########################################
+
+mi faresti vedere il tuo model? così magari ho una visuale completa
