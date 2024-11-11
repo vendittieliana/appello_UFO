@@ -174,4 +174,28 @@ getAllEdges e buildGraph mi sembrano fatti bene, quindi l'output torna?
         else:
             print("Non ci sono avvistamenti nel grafo.")
 
+##########################################
+# nuovo analizza grafo da mettere nel model:
+def analizza_grafo(self):
+        # Analizza il numero di nodi per ciascuna durata e la durata media
+        durata_counts = {}
+        for node in self._grafo.nodes(data=True):
+            duration = node[1]['duration']
+            if duration not in durata_counts:
+                durata_counts[duration] = 0
+            durata_counts[duration] += 1
 
+        # Calcola la durata media degli avvistamenti
+        durata_media = sum(node[1]['duration'] for node in self._grafo.nodes(data=True)) / len(self._grafo.nodes) if len(self._grafo.nodes) > 0 else 0
+
+        # Restituisce i dati di analisi in un dizionario
+        return {
+            "durata_counts": durata_counts,
+            "durata_media": durata_media
+        }
+
+# aggiungendo questo nell' handle_graph del controller ti vai ad accedere al dizionario creato nel model con l'analisi
+    
+        risultati_analisi = self._model.analizza_grafo()
+        durata_counts = risultati_analisi["durata_counts"]
+        durata_media = risultati_analisi["durata_media"]
