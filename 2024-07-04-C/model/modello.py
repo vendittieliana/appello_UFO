@@ -204,3 +204,32 @@ def analizza_grafo(self):
 ##########################################
 
 mi faresti vedere il tuo model? così magari ho una visuale completa
+#########################################
+# ho chiesto anche a chatgpt ma ho questo risultato:
+def analizza_grafo(self):
+        # Contatore delle durate di avvistamenti
+        durata_counts = {}
+        total_duration = 0
+        num_sightings = len(self._grafo.nodes)
+
+        # Itera sui nodi e conta i nodi per ogni durata
+        for node in self._grafo.nodes(data=True):
+            sighting = node[0]
+            duration = sighting.duration  # Assume che 'duration' sia un attributo del nodo
+
+            # Aggiungi la durata al contatore
+            if duration not in durata_counts:
+                durata_counts[duration] = 0
+            durata_counts[duration] += 1
+
+            # Calcola la somma totale delle durate
+            total_duration += duration
+
+        # Calcola la durata media
+        durata_media = total_duration / num_sightings if num_sightings > 0 else 0
+
+        # Restituisce i risultati in un dizionario
+        return {
+            "durata_counts": durata_counts,
+            "durata_media": durata_media
+        }
